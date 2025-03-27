@@ -5,6 +5,7 @@ import type { SortFilterItem } from 'lib/constants';
 import { createUrl } from 'lib/utils';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import type { ListItem, PathFilterItem } from '.';
 
 function PathFilterItem({ item }: { item: PathFilterItem }) {
@@ -63,5 +64,9 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
 }
 
 export function FilterItem({ item }: { item: ListItem }) {
-  return 'path' in item ? <PathFilterItem item={item} /> : <SortFilterItem item={item} />;
+  return (
+    <Suspense fallback={<div className="mt-2 flex text-sm"></div>}>
+      {'path' in item ? <PathFilterItem item={item} /> : <SortFilterItem item={item} />}
+    </Suspense>
+  );
 }
