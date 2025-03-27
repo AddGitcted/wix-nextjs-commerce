@@ -73,6 +73,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
   };
 
   return (
+    <Suspense fallback={<div className='mx-auto max-w-(--breakpoint-2xl) px-4'></div>}>
     <ProductProvider>
       <script
         type="application/ld+json"
@@ -107,6 +108,7 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
       </div>
       <Footer />
     </ProductProvider>
+    </Suspense>
   );
 }
 
